@@ -26,25 +26,15 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("CHAMEI");
-        System.out.println(request);
-        System.out.println(response);
-        System.out.println((filterChain));
-
         var tokenJWT = recuperarToken(request);
 
         if (tokenJWT != null) {
             var subject = tokenService.getSubject(tokenJWT);
-
-            System.out.println(subject+ " SUBJECT CHAMADA");
-
             var usuario = this.repository.findByLogin(subject);
-
             var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            System.out.println("LOGADO NA REQUISICAO");
         }
 
         // FilterChain: representa a cadeia de filtros na aplicação
