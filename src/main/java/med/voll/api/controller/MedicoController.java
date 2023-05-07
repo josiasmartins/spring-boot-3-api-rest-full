@@ -1,8 +1,8 @@
 package med.voll.api.controller;
 
 import jakarta.validation.Valid;
-import med.voll.api.medico.*;
-import org.apache.coyote.Response;
+import med.voll.api.domain.medico.*;
+import med.voll.api.domain.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +35,7 @@ public class MedicoController {
     @GetMapping
     public ResponseEntity<Page<DadosListagemMedico>> listar(@PageableDefault(size = 10, page = 0, sort = {"nome"}) Pageable paginacao) {
         var page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
-        return ResponseEntity.ok(page);
+        return ResponseEntity.ok(page); // retorna 200
     }
 
     @PutMapping
@@ -59,7 +59,7 @@ public class MedicoController {
     @GetMapping("/{id}")
     public ResponseEntity detalhar(@PathVariable Long id) {
         var medico = repository.getReferenceById(id);
-        return ResponseEntity.ok(new DadosDetatalhadoMedicos(medico));
+        return ResponseEntity.ok(new DadosDetatalhadoMedicos(medico)); // retorna 200 com o response do DTO (DadosDetatalhadoMedicos);
     }
 
 }
