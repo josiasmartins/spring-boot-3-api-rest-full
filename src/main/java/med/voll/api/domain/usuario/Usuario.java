@@ -28,7 +28,7 @@ public class Usuario implements UserDetails { // é uma entidade
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USEr"));
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override

@@ -42,6 +42,7 @@ public class SecurityConfigurations {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        System.out.println(new BCryptPasswordEncoder().getClass()+ "BCREPT");
         return new BCryptPasswordEncoder();
     }
 
