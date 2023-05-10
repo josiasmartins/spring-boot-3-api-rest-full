@@ -21,10 +21,20 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
                 select c.medico.id from Consulta c
                 where 
                 c.data = :data
+            and 
+                c.motivoCancelamento is null
             )
             order by rand()
             limit 1
             """) // permite inserir o comando sql usando a sixntaxe JPQL (Java Persistence Query Language). TEXT BLOCK
     // :que é o parametro do método
     Medico escolherMedicoAleatorioLivreNaData(Especialidade especialidade, LocalDateTime data);
+
+    @Query("""
+            select m.ativo
+            from Medico m
+            where
+            m.id = :id
+            """)
+    Boolean findAtivoById(Long id);
 }
